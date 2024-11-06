@@ -8,5 +8,5 @@ Hedef is a very simple CLI tool that organize your goals. Hedef means goal in Tu
     python hedef.py delete <goal_id>
     python hedef.py list
 
-## Copyright License
+## Copyright and License
 See LICENSE file for copyright and license information.
