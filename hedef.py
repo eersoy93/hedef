@@ -24,24 +24,23 @@ class Hedef:
 
 
 def load_goals():
-    if os.stat(FILENAME).st_size == 0:
+    Hedef.goals = []
+    Hedef.next_goal_id = 1
+
+    try:
+        with open(FILENAME, "r") as file:
+            goals_list = json.loads(file.read())
+
+            for goal in goals_list:
+                Hedef.goals.append(Hedef(goal["goal_id"], goal["goal_name"], goal["goal_completed"]))
+
+            if Hedef.goals:
+                Hedef.next_goal_id = max([goal.goal_id for goal in Hedef.goals]) + 1
+            else:
+                Hedef.next_goal_id = 1
+    except FileNotFoundError:
         Hedef.goals = []
         Hedef.next_goal_id = 1
-    else:
-        try:
-            with open(FILENAME, "r") as file:
-                goals_list = json.loads(file.read())
-
-                for goal in goals_list:
-                    Hedef.goals.append(Hedef(goal["goal_id"], goal["goal_name"], goal["goal_completed"]))
-
-                if Hedef.goals:
-                    Hedef.next_goal_id = max([goal.goal_id for goal in Hedef.goals]) + 1
-                else:
-                    Hedef.next_goal_id = 1
-        except FileNotFoundError:
-            Hedef.goals = []
-            Hedef.next_goal_id = 1
 
     return Hedef.goals
 
