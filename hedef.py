@@ -78,20 +78,20 @@ def list_goals():
         print(goal)
 
 
-def complete_goal(i):
+def complete_goal(goal_id):
     Hedef.goals = load_goals()
 
-    i = int(i)
+    goal_id = int(goal_id)
 
     for goal in Hedef.goals:
-        if goal.goal_id == i:
+        if goal.goal_id == goal_id:
             if goal.goal_completed:
                 print(f"The goal is already completed: {goal}")
                 sys.exit(EXIT_FAILURE)
             goal.goal_completed = True
             break
     else:
-        print(f"Invalid goal id number to complete: {i}")
+        print(f"Invalid goal id number to complete: {goal_id}")
         sys.exit(EXIT_FAILURE)
 
     save_goals()
@@ -99,17 +99,17 @@ def complete_goal(i):
     print(f"The goal has been completed: {goal}")
 
 
-def delete_goal(i):
+def delete_goal(goal_id):
     Hedef.goals = load_goals()
 
-    i = int(i)
+    goal_id = int(goal_id)
 
     for goal in Hedef.goals:
-        if goal.goal_id == i:
+        if goal.goal_id == goal_id:
             Hedef.goals.remove(goal)
             break
     else:
-        print(f"Invalid goal id number to delete: {i}")
+        print(f"Invalid goal id number to delete: {goal_id}")
         sys.exit(EXIT_FAILURE)
 
     save_goals()
